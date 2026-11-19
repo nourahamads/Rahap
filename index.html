@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رحب — منصة السفر والحجوزات</title>
+<meta name="description" content="رحب: طيران، تأشيرات، فنادق، سيارات، سائق خاص وباقات شهر عسل — مع تقدير فوري لسعر رحلتك.">
+<meta name="theme-color" content="#12302E">
+<meta property="og:title" content="رحب — منصة السفر والحجوزات">
+<meta property="og:description" content="قدّر سعر رحلتك فورًا وأرسل طلبك لفريق رحب.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C99A44'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%230C211F' font-family='sans-serif'%3E%D8%B1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12302E;
+    --ink-2:#0C211F;
+    --sand:#F3ECDA;
+    --sand-2:#E9DEC2;
+    --gold:#C99A44;
+    --gold-light:#E7C983;
+    --rust:#A24A2C;
+    --ivory:#F7F2E6;
+    --charcoal:#1D2925;
+    --line-dark: rgba(247,242,230,0.14);
+    --line-light: rgba(29,41,37,0.14);
+    --font-head:'El Messiri', 'IBM Plex Sans Arabic', sans-serif;
+    --font-body:'IBM Plex Sans Arabic', sans-serif;
+  }
+  :root{ color-scheme: light; }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--charcoal);
+    font-family:var(--font-body);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  :focus-visible{outline:2.5px solid var(--gold);outline-offset:3px;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  @media (max-width:640px){.wrap{padding:0 18px;}}
+
+  h1,h2,h3{font-family:var(--font-head);margin:0;font-weight:700;}
+  p{margin:0;}
+
+  /* ===== Header ===== */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(18,48,46,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;height:76px;color:var(--ivory);}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-size:1.5rem;font-weight:700;color:var(--gold-light);}
+  .brand .mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(155deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;color:var(--ink-2);font-weight:700;font-size:1.1rem;}
+  nav.links{display:flex;gap:32px;font-size:0.97rem;}
+  nav.links a{opacity:0.88;transition:opacity .2s;}
+  nav.links a:hover{opacity:1;}
+  .cta-btn{
+    background:var(--gold);color:var(--ink-2);padding:11px 22px;border-radius:8px;
+    font-weight:600;font-size:0.95rem;border:none;transition:background .2s, transform .15s;
+  }
+  .cta-btn:hover{background:var(--gold-light);}
+  .cta-btn:active{transform:scale(0.97);}
+  .cta-ghost{
+    border:1.5px solid rgba(247,242,230,0.35);color:var(--ivory);
+    background:transparent;padding:10px 20px;border-radius:8px;font-weight:600;font-size:0.95rem;
+    transition:border-color .2s, background .2s;
+  }
+  .cta-ghost:hover{border-color:var(--gold-light);background:rgba(247,242,230,0.06);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--ivory);font-size:1.6rem;}
+  .nav-actions{display:flex;align-items:center;gap:10px;}
+  .mobile-nav{display:flex;flex-direction:column;padding:8px 18px 16px;border-top:1px solid var(--line-dark);}
+  .mobile-nav[hidden]{display:none;}
+  .mobile-nav a{color:var(--ivory);padding:12px 4px;border-bottom:1px solid var(--line-dark);}
+  .mobile-nav a:last-child{border-bottom:none;}
+  @media (max-width:860px){
+    nav.links{display:none;}
+    .nav-toggle{display:block;}
+  }
+  @media (min-width:861px){ .mobile-nav{display:none !important;} }
+  html{scroll-padding-top:90px;}
+
+  /* ===== Hero ===== */
+  .hero{
+    background:radial-gradient(120% 140% at 85% 0%, #1B4440 0%, var(--ink) 45%, var(--ink-2) 100%);
+    color:var(--ivory);
+    padding:88px 0 110px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(circle, rgba(201,154,68,0.16) 1px, transparent 1.4px);
+    background-size:26px 26px;
+    opacity:0.5;pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.25fr 0.9fr;gap:56px;align-items:center;position:relative;z-index:1;
+  }
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px;}}
+  .eyebrow-plain{color:var(--gold-light);font-size:0.98rem;font-weight:600;margin-bottom:18px;}
+  .hero h1{font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:1.28;color:var(--ivory);}
+  .hero p.lead{margin-top:22px;font-size:1.12rem;color:rgba(247,242,230,0.82);max-width:46ch;}
+  .hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .hero-actions .cta-btn{padding:14px 26px;font-size:1rem;}
+  .hero-actions .cta-ghost{padding:13px 24px;}
+
+  /* departure board */
+  .board{
+    background:linear-gradient(160deg,#0F2624,#0A1D1B);
+    border:1px solid var(--line-dark);
+    border-radius:16px;
+    padding:26px 26px 22px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55);
+  }
+  .board-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+  .board-label{font-size:0.85rem;color:rgba(247,242,230,0.6);}
+  .board-dot{width:8px;height:8px;border-radius:50%;background:#6FCF97;box-shadow:0 0 8px #6FCF97;}
+  .board-status{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:rgba(247,242,230,0.65);}
+  .board-display{
+    background:#081716;border-radius:10px;padding:26px 18px;text-align:center;
+    border:1px solid rgba(201,154,68,0.25);
+  }
+  .board-caption{font-size:0.85rem;color:rgba(247,242,230,0.55);margin-bottom:10px;}
+  .board-word{
+    font-family:var(--font-head);font-size:1.9rem;font-weight:700;color:var(--gold-light);
+    transition:transform .32s ease, opacity .32s ease;
+    transform-origin:center top;
+  }
+  .board-word.flip{transform:rotateX(85deg);opacity:0;}
+  @media (prefers-reduced-motion:reduce){ .board-word{transition:none !important;} }
+  .board-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+  .board-chip{
+    font-size:0.8rem;padding:6px 12px;border-radius:20px;border:1px solid rgba(247,242,230,0.18);
+    color:rgba(247,242,230,0.75);
+  }
+
+  /* ===== Services (route strip) ===== */
+  .section{padding:96px 0;}
+  .section-head{max-width:60ch;margin-bottom:56px;}
+  .section-tag{color:var(--rust);font-weight:600;font-size:0.98rem;margin-bottom:12px;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem);color:var(--ink);line-height:1.3;}
+  .section-head p{margin-top:14px;font-size:1.05rem;color:#4B5652;}
+
+  .route{position:relative;}
+  .route-line{
+    position:absolute;top:34px;right:0;left:0;height:2px;
+    background:repeating-linear-gradient(to left,var(--gold) 0 10px,transparent 10px 20px);
+    z-index:0;
+  }
+  @media (max-width:900px){.route-line{display:none;}}
+  .route-items{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 28px;position:relative;z-index:1;}
+  @media (max-width:900px){.route-items{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.route-items{grid-template-columns:1fr;}}
+  .route-item{}
+  .route-icon{
+    width:68px;height:68px;border-radius:50%;background:var(--ink);color:var(--gold-light);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+    border:3px solid var(--sand);box-shadow:0 0 0 1px var(--line-light);
+  }
+  .route-icon svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.7;}
+  .route-item h3{font-size:1.18rem;color:var(--ink);margin-bottom:8px;}
+  .route-item p{color:#57625D;font-size:0.97rem;}
+
+  /* ===== Estimator ===== */
+  .estimator{background:var(--ink);color:var(--ivory);}
+  .estimator .section-tag{color:var(--gold-light);}
+  .estimator .section-head h2{color:var(--ivory);}
+  .estimator .section-head p{color:rgba(247,242,230,0.72);}
+  .est-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:36px;align-items:start;}
+  @media (max-width:940px){.est-grid{grid-template-columns:1fr;}}
+
+  .panel{
+    background:rgba(247,242,230,0.04);
+    border:1px solid var(--line-dark);
+    border-radius:16px;padding:30px;
+  }
+  .chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
+  .svc-chip{
+    display:flex;align-items:center;gap:8px;
+    padding:11px 16px;border-radius:9px;
+    border:1.5px solid var(--line-dark);background:transparent;color:rgba(247,242,230,0.85);
+    font-size:0.95rem;font-weight:500;transition:border-color .18s, background .18s, color .18s;
+  }
+  .svc-chip svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;}
+  .svc-chip.active{background:var(--gold);border-color:var(--gold);color:var(--ink-2);font-weight:600;}
+
+  .field-block{display:none;padding:20px 0;border-top:1px solid var(--line-dark);}
+  .field-block.show{display:block;}
+  .field-block h4{font-family:var(--font-head);font-size:1.05rem;color:var(--gold-light);margin-bottom:16px;}
+  .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:520px){.field-grid{grid-template-columns:1fr;}}
+  .field{display:flex;flex-direction:column;gap:7px;}
+  .field label{font-size:0.85rem;color:rgba(247,242,230,0.65);}
+  .contact-block{padding-bottom:20px;}
+  .contact-block h4{font-family:var(--font-head);font-size:1.05rem;color:var(--gold-light);margin:0 0 16px;}
+  .field input.invalid{border-color:#E27A5B;}
+  .form-error{color:#F0A58E;font-size:0.85rem;margin-top:10px;min-height:1.2em;}
+  .field select, .field input{
+    background:rgba(8,23,22,0.6);border:1px solid var(--line-dark);color:var(--ivory);
+    padding:10px 12px;border-radius:8px;font-family:inherit;font-size:0.95rem;
+  }
+  .field select:focus, .field input:focus{border-color:var(--gold);}
+
+  /* boarding pass receipt */
+  .pass{
+    background:var(--ivory);color:var(--ink-2);border-radius:16px;overflow:hidden;
+    position:sticky;top:100px;
+    box-shadow:0 30px 70px -25px rgba(0,0,0,0.5);
+  }
+  .pass-top{
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    padding:20px 24px;display:flex;justify-content:space-between;align-items:center;
+  }
+  .pass-top .brand-mini{font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--ink-2);}
+  .pass-top .pass-tag{font-size:0.78rem;color:rgba(18,48,46,0.7);}
+  .pass-body{padding:24px;}
+  .pass-line{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px dashed rgba(29,41,37,0.18);font-size:0.93rem;}
+  .pass-line span:first-child{color:#5B665F;}
+  .pass-line span:last-child{font-weight:600;}
+  .pass-empty{color:#7A847E;font-size:0.9rem;padding:18px 0;text-align:center;}
+  .pass-total{
+    display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:16px;
+    border-top:2px solid var(--ink-2);
+  }
+  .pass-total span:first-child{font-family:var(--font-head);font-size:1.05rem;}
+  .pass-total .amount{font-family:var(--font-head);font-size:1.85rem;font-weight:700;color:var(--rust);}
+  .pass-note{font-size:0.8rem;color:#7A847E;margin-top:14px;line-height:1.6;}
+  .pass-submit{
+    width:100%;margin-top:20px;padding:14px;border-radius:9px;border:none;
+    background:var(--ink-2);color:var(--ivory);font-weight:600;font-size:0.98rem;
+    transition:background .2s;
+  }
+  .pass-submit:hover{background:#0A1D1B;}
+  .pass-submit.sent{background:#3E7A5A;}
+  .pass-error{color:var(--rust);font-size:0.85rem;margin-top:10px;min-height:1.2em;text-align:center;}
+  .perf{position:relative;}
+  .perf::before, .perf::after{
+    content:"";position:absolute;width:22px;height:22px;background:var(--ink);border-radius:50%;top:-11px;
+  }
+  .perf::before{right:-11px;}
+  .perf::after{left:-11px;}
+
+  /* ===== How it works ===== */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+  @media (max-width:900px){.steps{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.steps{grid-template-columns:1fr;}}
+  .step{border-top:2px solid var(--gold);padding-top:18px;}
+  .step .num{font-family:var(--font-head);font-size:1.6rem;color:var(--gold);margin-bottom:10px;font-weight:700;}
+  .step h3{font-size:1.08rem;color:var(--ink);margin-bottom:8px;}
+  .step p{color:#57625D;font-size:0.95rem;}
+
+  /* ===== Testimonials + stats ===== */
+  .trust{background:var(--sand-2);}
+  .stats-row{display:flex;flex-wrap:wrap;gap:40px;margin-bottom:60px;padding-bottom:48px;border-bottom:1px solid var(--line-light);}
+  .stat b{display:block;font-family:var(--font-head);font-size:2.1rem;color:var(--ink);}
+  .stat span{color:#57625D;font-size:0.92rem;}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media (max-width:860px){.quotes{grid-template-columns:1fr;}}
+  .quote{background:var(--ivory);border-radius:14px;padding:26px;border:1px solid var(--line-light);}
+  .quote p.q{font-size:0.98rem;color:var(--charcoal);line-height:1.75;}
+  .quote .who{margin-top:16px;font-size:0.88rem;color:#6B756F;font-weight:600;}
+
+  /* ===== Footer ===== */
+  footer{background:var(--ink-2);color:rgba(247,242,230,0.75);padding:64px 0 32px;}
+  .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid var(--line-dark);}
+  @media (max-width:760px){.foot-grid{grid-template-columns:1fr;}}
+  .foot-brand{font-family:var(--font-head);font-size:1.4rem;color:var(--gold-light);margin-bottom:12px;}
+  .foot-col h4{color:var(--ivory);font-size:0.95rem;margin-bottom:14px;}
+  .foot-col a{display:block;font-size:0.9rem;margin-bottom:10px;color:rgba(247,242,230,0.68);}
+  .foot-col a:hover{color:var(--gold-light);}
+  .whats-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--ink-2);padding:11px 20px;border-radius:8px;font-weight:600;font-size:0.92rem;margin-top:6px;}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:26px;font-size:0.82rem;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <div class="brand"><span class="mark">ر</span> رحب</div>
+    <nav class="links">
+      <a href="#hero">الرئيسية</a>
+      <a href="#services">خدماتنا</a>
+      <a href="#estimator">قدّر رحلتك</a>
+      <a href="#how">كيف نعمل</a>
+      <a href="#contact">تواصل</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#estimator" class="cta-btn">ابدأ الآن</a>
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="القائمة" aria-expanded="false" aria-controls="mobileNav">☰</button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" hidden>
+    <a href="#hero">الرئيسية</a>
+    <a href="#services">خدماتنا</a>
+    <a href="#estimator">قدّر رحلتك</a>
+    <a href="#how">كيف نعمل</a>
+    <a href="#contact">تواصل</a>
+  </nav>
+</header>
+
+<section class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-plain">منصة رحب للسفر والحجوزات</div>
+      <h1>سفرتك تبدأ من فكرة… وتنتهي عند راحتك</h1>
+      <p class="lead">طيران، تأشيرات، فنادق، سيارات، سائق خاص، وباقات شهر عسل — كل شي بمكان وحد، وبتسعير فوري قبل ما تحجز أي شي.</p>
+      <div class="hero-actions">
+        <a href="#estimator" class="cta-btn">قدّر رحلتك الآن</a>
+        <a href="#services" class="cta-ghost">تصفح الخدمات</a>
+      </div>
+    </div>
+    <div class="board">
+      <div class="board-top">
+        <span class="board-label">لوحة خدمات رحب</span>
+        <span class="board-status"><span class="board-dot"></span> متاح الآن</span>
+      </div>
+      <div class="board-display">
+        <div class="board-caption">جاهزين نرتب لك</div>
+        <div class="board-word" id="boardWord">طيران</div>
+      </div>
+      <div class="board-list">
+        <span class="board-chip">تأشيرات</span>
+        <span class="board-chip">فنادق</span>
+        <span class="board-chip">سيارات</span>
+        <span class="board-chip">سائق خاص</span>
+        <span class="board-chip">شهر العسل</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">خدماتنا</div>
+      <h2>كل احتياجات رحلتك، تحت مظلة وحدة</h2>
+      <p>ما تحتاج تتنقل بين مكاتب ومواقع مختلفة. رحب يجمع لك كل خدمات السفر ويرتبها بالترتيب الصح.</p>
+    </div>
+    <div class="route">
+      <div class="route-line"></div>
+      <div class="route-items">
+        <div class="route-item">
+          <div class="route-icon"><svg viewBox="0 0 24 24"><path d="M2 12l9-2 6-8 2 1-3 8 6 1v2l-6 1 3 8-2 1-6-8-9-2z"/></svg></div>
+          <h3>حجز الطيران</h3>
+          <p>أفضل خطوط الطيران والأسعار لأي وجهة، داخلية أو دولية.</p>
+        </div>
+        <div class="route-item">
+          <div class="route-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="15" rx="2"/><circle cx="8.5" cy="10" r="2"/><path d="M4 17c1-2 3-3 4.5-3s3.5 1 4.5 3M14 9h6M14 13h6"/></svg></div>
+          <h3>التأشيرات</h3>
+          <p>نجهز تأشيرتك بأقل وقت وأقل تعقيد، مع متابعة أول بأول.</p>
+        </div>
+        <div class="route-item">
+          <div class="route-icon"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12M9 21v-6h6v6M4 21h16"/></svg></div>
+          <h3>حجز الفنادق</h3>
+          <p>من الاقتصادي للفاخر، نختار الأنسب لميزانيتك وذوقك.</p>
+        </div>
+        <div class="route-item">
+          <div class="route-icon"><svg viewBox="0 0 24 24"><path d="M3 13l2-6h14l2 6M5 13h14v5H5zM7 18v2M17 18v2"/><circle cx="7" cy="15" r="0.6"/><circle cx="17" cy="15" r="0.6"/></svg></div>
+          <h3>تأجير السيارات</h3>
+          <p>سيارتك جاهزة من لحظة وصولك، بكل الفئات والأحجام.</p>
+        </div>
+        <div class="route-item">
+          <div class="route-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v4M12 16v4M4 12h4M16 12h4M7 7l2.8 2.8M17 17l-2.8-2.8M17 7l-2.8 2.8M7 17l2.8-2.8"/></svg></div>
+          <h3>سائق خاص</h3>
+          <p>سائق يعرف الطريق ويعرف ضيافتك، وانت بس استمتع بالرحلة.</p>
+        </div>
+        <div class="route-item">
+          <div class="route-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg></div>
+          <h3>باقات شهر العسل</h3>
+          <p>رحلات مصممة بعناية لبداية جديدة تستاهل كل التفاصيل.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section estimator" id="estimator">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">قدّر رحلتك</div>
+      <h2>عبّي بيانات رحلتك، وشوف السعر التقديري فورًا</h2>
+      <p>اختر الخدمات اللي تحتاجها وعدّل التفاصيل — التقدير يتحدث معك أول بأول قبل ما ترسل طلبك لفريقنا.</p>
+    </div>
+
+    <div class="est-grid">
+      <div class="panel">
+        <div class="chip-row" id="chipRow">
+          <button type="button" class="svc-chip" data-svc="flight"><svg viewBox="0 0 24 24"><path d="M2 12l9-2 6-8 2 1-3 8 6 1v2l-6 1 3 8-2 1-6-8-9-2z"/></svg> طيران</button>
+          <button type="button" class="svc-chip" data-svc="visa"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="15" rx="2"/><circle cx="8.5" cy="10" r="2"/></svg> تأشيرة</button>
+          <button type="button" class="svc-chip" data-svc="hotel"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12M9 21v-6h6v6M4 21h16"/></svg> فندق</button>
+          <button type="button" class="svc-chip" data-svc="car"><svg viewBox="0 0 24 24"><path d="M3 13l2-6h14l2 6M5 13h14v5H5z"/></svg> سيارة</button>
+          <button type="button" class="svc-chip" data-svc="driver"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v4M12 16v4M4 12h4M16 12h4"/></svg> سائق خاص</button>
+          <button type="button" class="svc-chip" data-svc="honeymoon"><svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg> شهر عسل</button>
+        </div>
+
+        <div class="contact-block">
+          <h4>بياناتك</h4>
+          <div class="field-grid">
+            <div class="field"><label for="c_name">الاسم</label><input type="text" id="c_name" autocomplete="name" required></div>
+            <div class="field"><label for="c_phone">رقم الجوال</label><input type="tel" id="c_phone" autocomplete="tel" inputmode="tel" placeholder="05xxxxxxxx" required dir="ltr"></div>
+            <div class="field"><label for="c_dest">الوجهة</label><input type="text" id="c_dest" placeholder="مثال: إسطنبول"></div>
+            <div class="field"><label for="c_date">تاريخ السفر</label><input type="date" id="c_date"></div>
+          </div>
+        </div>
+
+        <div class="field-block" data-panel="flight">
+          <h4>تفاصيل الطيران</h4>
+          <div class="field-grid">
+            <div class="field"><label>عدد المسافرين</label><input type="number" id="flight_pax" min="1" value="2"></div>
+            <div class="field"><label>نوع الوجهة</label>
+              <select id="flight_dest"><option value="domestic">داخلية</option><option value="intl">دولية</option></select>
+            </div>
+            <div class="field"><label>الدرجة</label>
+              <select id="flight_class"><option value="economy">اقتصادية</option><option value="business">أعمال</option></select>
+            </div>
+            <div class="field"><label>نوع الرحلة</label>
+              <select id="flight_trip"><option value="round">ذهاب وعودة</option><option value="one">ذهاب فقط</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-block" data-panel="visa">
+          <h4>تفاصيل التأشيرة</h4>
+          <div class="field-grid">
+            <div class="field"><label>عدد الأشخاص</label><input type="number" id="visa_pax" min="1" value="2"></div>
+            <div class="field"><label>نوع التأشيرة</label>
+              <select id="visa_type"><option value="tourist">سياحية</option><option value="business">عمل</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-block" data-panel="hotel">
+          <h4>تفاصيل الفندق</h4>
+          <div class="field-grid">
+            <div class="field"><label>عدد الليالي</label><input type="number" id="hotel_nights" min="1" value="4"></div>
+            <div class="field"><label>عدد الغرف</label><input type="number" id="hotel_rooms" min="1" value="1"></div>
+            <div class="field"><label>تصنيف الفندق</label>
+              <select id="hotel_class"><option value="3">3 نجوم</option><option value="4" selected>4 نجوم</option><option value="5">5 نجوم</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-block" data-panel="car">
+          <h4>تفاصيل السيارة</h4>
+          <div class="field-grid">
+            <div class="field"><label>عدد الأيام</label><input type="number" id="car_days" min="1" value="4"></div>
+            <div class="field"><label>نوع السيارة</label>
+              <select id="car_type"><option value="economy">اقتصادية</option><option value="suv">دفع رباعي</option><option value="luxury">فاخرة</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-block" data-panel="driver">
+          <h4>تفاصيل السائق الخاص</h4>
+          <div class="field-grid">
+            <div class="field"><label>عدد الأيام</label><input type="number" id="driver_days" min="1" value="4"></div>
+          </div>
+        </div>
+
+        <div class="field-block" data-panel="honeymoon">
+          <h4>باقة شهر العسل (لشخصين)</h4>
+          <div class="field-grid">
+            <div class="field"><label>الباقة</label>
+              <select id="honeymoon_tier">
+                <option value="classic">كلاسيك</option>
+                <option value="premium">بريميوم</option>
+                <option value="lux">لوكس</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pass perf">
+        <div class="pass-top">
+          <span class="brand-mini">بطاقة رحب</span>
+          <span class="pass-tag">تقدير أولي</span>
+        </div>
+        <div class="pass-body">
+          <div id="passLines"></div>
+          <div class="pass-total">
+            <span>الإجمالي التقديري</span>
+            <span class="amount" id="passTotal">٠ ر.س</span>
+          </div>
+          <p class="pass-note">هذا سعر تقديري يتغير حسب توفر الحجوزات وتواريخ السفر. فريق رحب يتواصل معك خلال ساعات لتأكيد السعر النهائي.</p>
+          <button type="button" class="pass-submit" id="passSubmit">أرسل الطلب عبر واتساب</button>
+          <p class="pass-error" id="passError" role="alert"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">كيف نعمل</div>
+      <h2>من الطلب للسفر، أربع خطوات بس</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">١</div><h3>عبّي طلبك</h3><p>اختر خدماتك وعبّي تفاصيل رحلتك بأداة التقدير.</p></div>
+      <div class="step"><div class="num">٢</div><h3>استلم التقدير</h3><p>يوصلك سعر تقديري فوري قبل أي التزام.</p></div>
+      <div class="step"><div class="num">٣</div><h3>تأكيد الفريق</h3><p>فريقنا يراجع التفاصيل ويأكد لك السعر النهائي والمواعيد.</p></div>
+      <div class="step"><div class="num">٤</div><h3>سافر براحتك</h3><p>نجهز كل شي من الحجز للاستقبال، وانت بس سافر.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section trust">
+  <div class="wrap">
+    <div class="stats-row">
+      <div class="stat"><b>+5,000</b><span>رحلة نظّمها رحب</span></div>
+      <div class="stat"><b>+40</b><span>وجهة حول العالم</span></div>
+      <div class="stat"><b>24/7</b><span>دعم أثناء رحلتك</span></div>
+      <div class="stat"><b>&lt; ساعتين</b><span>وقت الرد على الطلبات</span></div>
+    </div>
+    <div class="quotes">
+      <div class="quote"><p class="q">رتبنا رحلة شهر العسل كاملة من رحب، من التذاكر لين السائق اللي كان مستنينا بالمطار. كل شي كان مرتب من غير ما نتعب.</p><div class="who">أم سلطان، الرياض</div></div>
+      <div class="quote"><p class="q">استخدمت أداة التقدير قبل ما أحجز، وطلع السعر قريب جدًا من اللي أكده الفريق بعدين. وفّرت علي وقت كبير.</p><div class="who">فهد العتيبي، جدة</div></div>
+      <div class="quote"><p class="q">تأشيرتنا طلعت بوقت قياسي، والفندق كان بالضبط زي اللي طلبناه. رحب صار خياري الأول لأي سفرة.</p><div class="who">نورة القحطاني، الدمام</div></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">رحب</div>
+        <p style="max-width:36ch;font-size:0.92rem;color:rgba(247,242,230,0.65);">منصة سفر وحجوزات متكاملة — طيران، تأشيرات، فنادق، سيارات، سائق خاص، وباقات شهر عسل، بتقدير فوري لكل طلب.</p>
+        <a href="#" class="whats-btn" id="footWhats" target="_blank" rel="noopener">تواصل عبر واتساب</a>
+      </div>
+      <div class="foot-col">
+        <h4>الخدمات</h4>
+        <a href="#services">حجز الطيران</a>
+        <a href="#services">التأشيرات</a>
+        <a href="#services">حجز الفنادق</a>
+        <a href="#services">سائق خاص</a>
+      </div>
+      <div class="foot-col">
+        <h4>المنصة</h4>
+        <a href="#estimator">قدّر رحلتك</a>
+        <a href="#how">كيف نعمل</a>
+        <a href="#contact">تواصل معنا</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 رحب. جميع الحقوق محفوظة.</span>
+      <span>مكة — الرياض — جدة</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== إعدادات المنصة — عدّل هنا =====
+  // رقم واتساب الاستقبال بالصيغة الدولية بدون + أو أصفار (مثال: 9665XXXXXXXX)
+  const CONFIG = { whatsapp: '966500000000' };
+
+  // Mobile menu
+  (function(){
+    const btn = document.getElementById('navToggle');
+    const menu = document.getElementById('mobileNav');
+    btn.addEventListener('click', function(){
+      const open = menu.hidden;
+      menu.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    menu.addEventListener('click', function(e){
+      if(e.target.tagName === 'A'){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); }
+    });
+  })();
+
+  document.getElementById('footWhats').href = 'https://wa.me/' + CONFIG.whatsapp;
+
+  // Departure board flip animation
+  (function(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const words = ['طيران','تأشيرات','فنادق','سيارات','سائق خاص','شهر العسل'];
+    let i = 0;
+    const el = document.getElementById('boardWord');
+    setInterval(function(){
+      el.classList.add('flip');
+      setTimeout(function(){
+        i = (i + 1) % words.length;
+        el.textContent = words[i];
+        el.classList.remove('flip');
+      }, 260);
+    }, 2200);
+  })();
+
+  // Estimator logic
+  const PRICES = {
+    flight: { economy_domestic:350, economy_intl:1800, business_domestic:900, business_intl:5500 },
+    visa: { tourist:350, business:600 },
+    hotel: { 3:250, 4:450, 5:850 },
+    car: { economy:150, suv:300, luxury:450 },
+    driver: 220,
+    honeymoon: { classic:6000, premium:12000, lux:22000 }
+  };
+  const SERVICE_LABELS = { flight:'طيران', visa:'تأشيرات', hotel:'فندق', car:'سيارة', driver:'سائق خاص', honeymoon:'شهر عسل' };
+
+  const active = new Set(['flight','hotel']);
+
+  function fmt(n){
+    return n.toLocaleString('ar-SA') + ' ر.س';
+  }
+
+  function computeService(svc){
+    if(svc === 'flight'){
+      const pax = Math.max(1, parseInt(document.getElementById('flight_pax').value) || 1);
+      const dest = document.getElementById('flight_dest').value;
+      const cls = document.getElementById('flight_class').value;
+      const trip = document.getElementById('flight_trip').value;
+      const base = PRICES.flight[cls + '_' + dest];
+      const tripMult = trip === 'round' ? 1.8 : 1;
+      return Math.round(base * tripMult * pax);
+    }
+    if(svc === 'visa'){
+      const pax = Math.max(1, parseInt(document.getElementById('visa_pax').value) || 1);
+      const type = document.getElementById('visa_type').value;
+      return PRICES.visa[type] * pax;
+    }
+    if(svc === 'hotel'){
+      const nights = Math.max(1, parseInt(document.getElementById('hotel_nights').value) || 1);
+      const rooms = Math.max(1, parseInt(document.getElementById('hotel_rooms').value) || 1);
+      const cls = document.getElementById('hotel_class').value;
+      return PRICES.hotel[cls] * nights * rooms;
+    }
+    if(svc === 'car'){
+      const days = Math.max(1, parseInt(document.getElementById('car_days').value) || 1);
+      const type = document.getElementById('car_type').value;
+      return PRICES.car[type] * days;
+    }
+    if(svc === 'driver'){
+      const days = Math.max(1, parseInt(document.getElementById('driver_days').value) || 1);
+      return PRICES.driver * days;
+    }
+    if(svc === 'honeymoon'){
+      const tier = document.getElementById('honeymoon_tier').value;
+      return PRICES.honeymoon[tier];
+    }
+    return 0;
+  }
+
+  function describeService(svc){
+    if(svc === 'flight'){
+      const pax = document.getElementById('flight_pax').value;
+      const cls = document.getElementById('flight_class').value === 'business' ? 'أعمال' : 'اقتصادية';
+      return 'طيران × ' + pax + ' (' + cls + ')';
+    }
+    if(svc === 'visa'){
+      const pax = document.getElementById('visa_pax').value;
+      return 'تأشيرات × ' + pax;
+    }
+    if(svc === 'hotel'){
+      const nights = document.getElementById('hotel_nights').value;
+      const cls = document.getElementById('hotel_class').value;
+      return 'فندق ' + cls + ' نجوم × ' + nights + (nights == 1 ? ' ليلة' : ' ليالٍ');
+    }
+    if(svc === 'car'){
+      const days = document.getElementById('car_days').value;
+      return 'تأجير سيارة × ' + days + (days == 1 ? ' يوم' : ' أيام');
+    }
+    if(svc === 'driver'){
+      const days = document.getElementById('driver_days').value;
+      return 'سائق خاص × ' + days + (days == 1 ? ' يوم' : ' أيام');
+    }
+    if(svc === 'honeymoon'){
+      const tier = document.getElementById('honeymoon_tier').value;
+      const labels = {classic:'كلاسيك', premium:'بريميوم', lux:'لوكس'};
+      return 'باقة شهر عسل — ' + labels[tier];
+    }
+    return SERVICE_LABELS[svc];
+  }
+
+  function render(){
+    const linesEl = document.getElementById('passLines');
+    const totalEl = document.getElementById('passTotal');
+    linesEl.innerHTML = '';
+    let total = 0;
+    if(active.size === 0){
+      linesEl.innerHTML = '<div class="pass-empty">اختر خدمة أو أكثر لعرض التقدير</div>';
+    } else {
+      active.forEach(function(svc){
+        const cost = computeService(svc);
+        total += cost;
+        const row = document.createElement('div');
+        row.className = 'pass-line';
+        row.innerHTML = '<span>' + describeService(svc) + '</span><span>' + fmt(cost) + '</span>';
+        linesEl.appendChild(row);
+      });
+    }
+    totalEl.textContent = fmt(total);
+  }
+
+  function syncChips(){
+    document.querySelectorAll('.svc-chip').forEach(function(chip){
+      const svc = chip.dataset.svc;
+      chip.classList.toggle('active', active.has(svc));
+    });
+    document.querySelectorAll('.field-block').forEach(function(panel){
+      panel.classList.toggle('show', active.has(panel.dataset.panel));
+    });
+  }
+
+  document.getElementById('chipRow').addEventListener('click', function(e){
+    const chip = e.target.closest('.svc-chip');
+    if(!chip) return;
+    const svc = chip.dataset.svc;
+    if(active.has(svc)) active.delete(svc); else active.add(svc);
+    syncChips();
+    render();
+  });
+
+  document.querySelectorAll('.field-block input, .field-block select').forEach(function(el){
+    el.addEventListener('input', render);
+    el.addEventListener('change', render);
+  });
+
+  // Keep number inputs within range when the user leaves the field
+  document.querySelectorAll('.field-block input[type=number]').forEach(function(el){
+    el.addEventListener('blur', function(){
+      const v = parseInt(el.value);
+      if(!v || v < 1){ el.value = 1; render(); }
+      if(v > 50){ el.value = 50; render(); }
+    });
+  });
+
+  // Prevent picking a past travel date
+  (function(){
+    const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+    document.getElementById('c_date').min = d.toISOString().slice(0,10);
+  })();
+
+  function normalizePhone(raw){
+    // Convert Arabic-Indic digits, strip spaces/dashes
+    return raw.replace(/[٠-٩]/g, function(c){ return '٠١٢٣٤٥٦٧٨٩'.indexOf(c); })
+              .replace(/[\s\-()]/g,'');
+  }
+
+  document.getElementById('passSubmit').addEventListener('click', function(){
+    const err = document.getElementById('passError');
+    const nameEl = document.getElementById('c_name');
+    const phoneEl = document.getElementById('c_phone');
+    nameEl.classList.remove('invalid'); phoneEl.classList.remove('invalid');
+    err.textContent = '';
+
+    if(active.size === 0){ err.textContent = 'اختر خدمة وحدة على الأقل.'; return; }
+    const name = nameEl.value.trim();
+    const phone = normalizePhone(phoneEl.value);
+    if(!name){ nameEl.classList.add('invalid'); nameEl.focus(); err.textContent = 'اكتب اسمك عشان نتواصل معك.'; return; }
+    if(!/^\+?\d{9,15}$/.test(phone)){ phoneEl.classList.add('invalid'); phoneEl.focus(); err.textContent = 'رقم الجوال غير صحيح.'; return; }
+
+    const dest = document.getElementById('c_dest').value.trim();
+    const date = document.getElementById('c_date').value;
+    let total = 0;
+    const lines = [];
+    active.forEach(function(svc){
+      const cost = computeService(svc); total += cost;
+      lines.push('• ' + describeService(svc) + ': ' + fmt(cost));
+    });
+    const msg = [
+      'طلب جديد من منصة رحب',
+      'الاسم: ' + name,
+      'الجوال: ' + phone,
+      dest ? 'الوجهة: ' + dest : null,
+      date ? 'تاريخ السفر: ' + date : null,
+      '',
+      'الخدمات:',
+      lines.join('\n'),
+      '',
+      'الإجمالي التقديري: ' + fmt(total)
+    ].filter(function(x){ return x !== null; }).join('\n');
+
+    window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    this.textContent = 'تم تجهيز طلبك ✓';
+    this.classList.add('sent');
+    setTimeout(() => { this.textContent = 'أرسل الطلب عبر واتساب'; this.classList.remove('sent'); }, 2600);
+  });
+
+  syncChips();
+  render();
+</script>
+
+</body>
+</html>
